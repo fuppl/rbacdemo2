@@ -1,0 +1,36 @@
+server:
+  port: 10002
+spring:
+  application:
+    name: login-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+  instance:
+    prefer-ip-address: true # 使用IP地址进行注册
+
+# 修改ribbon的负载均衡策略
+service-product:
+  ribbon:
+    ConnectTimeout: 250 # Ribbon的连接超时时间
+    ReadTimeout: 1000 # Ribbon的数据读取超时时间
+    OkToRetryOnAllOperations: true # 是否对所有操作都进行重试
+    MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
+    MaxAutoRetries: 1 # 对当前实例的重试次数
+
+#  配置feign日志的输出
+# 日志级别： NONE 不输出 BASIC适用于生产环境问题追踪
+#    HEADERS 在basic基础上记录请求和响应头 FULL 记录所有
+feign:
+  client:
+    config:
+      server-product:
+        loggerLevel:
+
+# my
+my:
+  secretkey: R28K42ZEJ8LWRHU5
+  salt: 636eac2534bcfcb0
+  user: 6983f953b49c88210cb9
+  admin: bb63e5f7e0f2ffae845c

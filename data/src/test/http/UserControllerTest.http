@@ -1,0 +1,40 @@
+POST http://localhost:10001/api/user/login
+Content-Type: application/json
+
+{
+  "name": "update",
+  "password": "456123"
+}
+
+###
+GET http://localhost:10001/api/user/usersWithRole/1
+Accept: application/json
+
+###
+GET http://localhost:10001/api/user/usersWithRole
+Accept: application/json
+
+###
+PATCH http://localhost:10001/api/user/users/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "newTest",
+  "password": "123456"
+}
+
+###
+GET http://localhost:10001/api/user/users
+Accept: application/json
+
+###
+POST http://localhost:10001/api/user/user
+Content-Type: application/json
+
+{
+  "name": "httptest",
+  "password": "123456"
+}
+
+###

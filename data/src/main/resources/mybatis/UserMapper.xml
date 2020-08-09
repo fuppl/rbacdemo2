@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.data.dao.UserMapper">
+    
+    <resultMap id="userMap" type="user">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <collection property="roles" ofType="role" >
+            <id property="id" column="rid" />
+            <result property="name" column="role"/>
+        </collection>
+    </resultMap>
+
+    <select id="listByNameAndPassword" resultMap="userMap" parameterType="user">
+        SELECT u.*, r.id as rid, r.name as role from user u
+	LEFT OUTER JOIN userrole ur on u.id = ur.userid
+	LEFT OUTER JOIN role r on r.id = ur.roleid
+	where u.name = #{name} and u.password = #{password};
+    </select>
+
+    <select id="listWithRole" resultMap="userMap">
+SELECT u.*, r.id as rid , r.name as role  from user u LEFT OUTER JOIN
+ userrole ur on u.id = ur.userid
+ LEFT OUTER JOIN
+ role r on ur.roleid = r.id
+    </select>
+
+    <insert id="save" parameterType="User">
+        insert into user(name, password) values ('${name}', '${password}')
+    </insert>
+
+    <select id="list" resultType="User">
+        select * from user
+    </select>
+
+    <select id="get" resultType="User" parameterType="int">
+        select * from USER where id = #{id}
+    </select>
+
+    <select id="getWithRole" resultMap="userMap" parameterType="int">
+        SELECT u.*, r.id as rid, r.name as role from user u
+	LEFT OUTER JOIN userrole ur on u.id = ur.userid
+	LEFT OUTER JOIN role r on r.id = ur.roleid
+	where u.id = #{id};
+    </select>
+
+    <delete id="deleteById" parameterType="int">
+        delete  from user where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="User">
+        update user set name = #{name}, password = #{password} where id = #{id}
+    </update>
+</mapper>

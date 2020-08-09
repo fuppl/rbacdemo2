@@ -1,0 +1,13 @@
+POST http://localhost:10002/api/login
+Content-Type: application/json
+
+{
+  "id": 2,
+  "password": "456123"
+}
+
+###
+GET http://localhost:10002/api/login
+Accept: application/json
+
+###

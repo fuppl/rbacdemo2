@@ -1,0 +1,37 @@
+GET http://localhost:10001/api/role/rolesWithUsers/2
+Accept: application/json
+
+###
+GET http://localhost:10001/api/role/rolesWithUsers
+Accept: application/json
+
+###
+DELETE http://localhost:10001/api/role/roles/5
+Accept: application/json
+
+###
+PATCH http://localhost:10001/api/role/roles/5
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "lalala"
+}
+
+###
+GET http://localhost:10001/api/role/roles/4
+Accept: application/json
+
+###
+POST http://localhost:10001/api/role/roles/role
+Content-Type: application/json
+
+{
+  "name": "lilaosi"
+}
+
+###
+GET http://localhost:10001/api/role/roles
+Accept: application/json
+
+###

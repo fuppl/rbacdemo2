@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/rbacdemo?createDatabaseIfNotExist=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  application:
+    name: data-service
+
+mybatis:
+  # model的包
+  type-aliases-package: com.example.data.entity
+  mapper-locations: classpath:mybatis/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 10001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10000/eureka/
+  instance:
+    prefer-ip-address: true # 使用IP地址进行注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # 向注册中心中注册服务id
+    lease-renewal-interval-in-seconds: 5 # 发送心跳间隔
+    lease-expiration-duration-in-seconds: 10 # 续约到期时间
